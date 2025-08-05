@@ -6,12 +6,16 @@ const CURVE_LOCKER = "0x52f541764E6e90eeBc5c21Ff570De0e2D63766B6";
 
 MyERC20.Transfer.handler(
   async ({ event, context }: { event: any, context: any }) => {
-    
+
     let tx_type = "";
-    if(event.params.from.toLowerCase() === ZERO_ADDRESS.toLowerCase()) {
+    if (event.params.from.toLowerCase() === ZERO_ADDRESS.toLowerCase()) {
       tx_type = "deposit";
     } else {
       tx_type = "withdraw";
+    }
+
+    if (event.srcAddress.toLowerCase() === "0xD533a949740bb3306d119CC777fa900bA034cd52".toLowerCase()) {
+      return;
     }
 
     context.Transfer.set({
@@ -25,12 +29,12 @@ MyERC20.Transfer.handler(
       timestamp: event.block.timestamp
     });
   },
-  { 
-    wildcard: true, 
+  {
+    wildcard: true,
     eventFilters: [
       { from: ZERO_ADDRESS, to: CURVE_LOCKER },
       { from: CURVE_LOCKER, to: ZERO_ADDRESS },
-    ] 
+    ]
   }
 );
 
@@ -38,7 +42,7 @@ const getLpPrice = async (lp: string, chain: string, timestamp: number): Promise
   try {
     const { data } = await axios.get(`https://coins.llama.fi/prices/historical/${timestamp}/${chain}:${lp.toLowerCase()}`)
     const coin = data.coins[`${chain}:${lp.toLowerCase()}`]
-    return coin.price; 
+    return coin.price;
   }
   catch (e) {
     return 0;
