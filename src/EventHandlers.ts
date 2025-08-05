@@ -36,7 +36,7 @@ const getLpPrice = async (lp: string, chain: string, timestamp: number): Promise
   try {
     const { data } = await axios.get(`https://coins.llama.fi/prices/historical/${timestamp}/${chain}:${lp.toLowerCase()}`)
     const coin = data.coins[`${chain}:${lp.toLowerCase()}`]
-    return coin.price;
+    return coin.price; 
   }
   catch (e) {
     return 0;
