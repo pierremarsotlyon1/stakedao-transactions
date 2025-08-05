@@ -1,7 +1,7 @@
 name: transefer-indexer
 networks:
   - id: 1
-    start_block: 22032087
+    start_block: 23016528
     contracts:
       - name: MyERC20
         address: []
