@@ -1,0 +1,8 @@
+type Transfer {
+  id: ID!
+  product: String!
+  tx_type: String!
+  lp: String!
+  amount: BigInt!
+  price: Float!
+}
