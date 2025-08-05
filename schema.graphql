@@ -1,5 +1,7 @@
 type Transfer {
   id: ID!
+  hash: String!
+  timestamp: Int!
   product: String!
   tx_type: String!
   lp: String!

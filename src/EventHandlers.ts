@@ -20,7 +20,9 @@ MyERC20.Transfer.handler(
       tx_type,
       lp: event.srcAddress,
       amount: event.params.value,
-      price: await getLpPrice(event.srcAddress, "ethereum", event.block.timestamp)
+      price: await getLpPrice(event.srcAddress, "ethereum", event.block.timestamp),
+      hash: event.transaction.hash,
+      timestamp: event.block.timestamp
     });
   },
   { 
